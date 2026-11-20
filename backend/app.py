@@ -488,27 +488,64 @@ def telegram_user_history(telegram_id):
         "username": user.username,
         "history": history
     }), 200
+    # ==================================================
+# УВЕДОМЛЕНИЯ ДЛЯ АДМИНСКОГО TELEGRAM-БОТА
+# ==================================================
+
+@app.route("/internal/notifications", methods=["GET"])
 @require_internal_api_key
-def internal_telegram_user(telegram_id):
+def internal_notifications():
 
-    user = User.query.filter_by(
-        telegram_id=telegram_id
-    ).first()
+    after_id = request.args.get("after_id", type=int)
 
-    if not user:
+    latest_id = (
+        db.session.query(db.func.max(ActivityLog.id)).scalar()
+        or 0
+    )
 
+    # Первый запуск: сообщаем боту текущую позицию,
+    # чтобы не отправлять старые события.
+    if after_id is None or after_id < 0:
         return jsonify({
-            "linked": False
-        }), 404
+            "events": [],
+            "latest_id": latest_id
+        }), 200
+
+    logs = (
+        ActivityLog.query
+        .filter(
+            ActivityLog.id > after_id,
+            ActivityLog.event_type.in_([
+                "booking_created",
+                "booking_cancelled"
+            ])
+        )
+        .order_by(ActivityLog.id.asc())
+        .limit(100)
+        .all()
+    )
+
+    events = []
+
+    for log in logs:
+
+        user = db.session.get(User, log.user_id)
+
+        events.append({
+            "id": log.id,
+            "event_type": log.event_type,
+            "username": user.username if user else "Неизвестно",
+            "full_name": user.full_name if user else "Неизвестно",
+            "place_name": log.place_name,
+            "booking_date": log.booking_date,
+            "start_time": log.start_time,
+            "end_time": log.end_time
+        })
 
     return jsonify({
-        "linked": True,
-        "user_id": user.id,
-        "username": user.username,
-        "full_name": user.full_name
+        "events": events,
+        "latest_id": latest_id
     }), 200
-
-
 # ==================================================
 # ВСПОМОГАТЕЛЬНАЯ ФУНКЦИЯ ДЛЯ ОТМЕНЫ
 # ==================================================

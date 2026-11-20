@@ -75,6 +75,35 @@ def init_db():
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         """)
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS notification_state (
+                id INTEGER PRIMARY KEY,
+                last_activity_id INTEGER NOT NULL DEFAULT 0
+            )
+        """)
+
+
+def get_notification_cursor():
+    with sqlite3.connect(DB_PATH) as conn:
+        row = conn.execute("""
+            SELECT last_activity_id
+            FROM notification_state
+            WHERE id = 1
+        """).fetchone()
+        return row[0] if row else None
+
+
+def save_notification_cursor(activity_id):
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.execute("""
+            INSERT INTO notification_state (
+                id,
+                last_activity_id
+            )
+            VALUES (1, ?)
+            ON CONFLICT(id)
+            DO UPDATE SET last_activity_id = excluded.last_activity_id
+        """, (activity_id,))
 
 
 async def backend_request(method, path, data=None):
@@ -401,13 +430,121 @@ async def cancel_request(message: Message):
     )
 
 
-async def main():
+async def notifications_worker():
+    """
+    Проверяет новые бронирования и отмены на сайте.
+    Курсор хранится в SQLite, поэтому после перезапуска
+    уже отправленные уведомления не дублируются.
+    """
+    logging.info("Проверка уведомлений о бронированиях запущена")
 
+    while True:
+        try:
+            cursor = get_notification_cursor()
+
+            # Первый запуск: фиксируем текущую позицию,
+            # не отправляя владельцу старые события.
+            if cursor is None:
+                status, data = await backend_request(
+                    "GET",
+                    "/internal/notifications?after_id=-1"
+                )
+
+                if status != 200:
+                    raise RuntimeError(
+                        f"Backend вернул статус {status}: {data}"
+                    )
+
+                save_notification_cursor(
+                    int(data.get("latest_id", 0))
+                )
+                logging.info("Начальная позиция уведомлений сохранена")
+
+            else:
+                status, data = await backend_request(
+                    "GET",
+                    f"/internal/notifications?after_id={cursor}"
+                )
+
+                if status != 200:
+                    raise RuntimeError(
+                        f"Backend вернул статус {status}: {data}"
+                    )
+
+                events = data.get("events", [])
+
+                for event in events:
+                    event_type = event.get("event_type")
+
+                    if event_type == "booking_created":
+                        title = "📥 НОВАЯ БРОНЬ С САЙТА"
+                    elif event_type == "booking_cancelled":
+                        title = "❌ ОТМЕНА БРОНИРОВАНИЯ С САЙТА"
+                    else:
+                        save_notification_cursor(
+                            int(event.get("id", cursor))
+                        )
+                        continue
+
+                    full_name = event.get("full_name") or "Не указано"
+                    username = event.get("username") or "Не указан"
+                    place_name = event.get("place_name") or "Неизвестно"
+                    booking_date = event.get("booking_date") or "Не указана"
+                    start_time = event.get("start_time") or "?"
+                    end_time = event.get("end_time") or "?"
+
+                    message_text = (
+                        f"{title}\n\n"
+                        f"👤 Клиент: {full_name}\n"
+                        f"🔑 Логин: {username}\n"
+                        f"🎮 Место: {place_name}\n"
+                        f"📅 Дата: {booking_date}\n"
+                        f"🕒 Время: {start_time}–{end_time}"
+                    )
+
+                    # Курсор двигаем только после успешной отправки.
+                    await bot.send_message(
+                        chat_id=OWNER_ID,
+                        text=message_text
+                    )
+
+                    save_notification_cursor(int(event["id"]))
+
+                # Если получили меньше 100 событий, очередь дочитана.
+                if len(events) < 100:
+                    save_notification_cursor(
+                        int(data.get("latest_id", cursor))
+                    )
+
+        except asyncio.CancelledError:
+            raise
+
+        except Exception:
+            logging.exception(
+                "Ошибка проверки/отправки уведомлений о бронированиях"
+            )
+
+        await asyncio.sleep(5)
+
+
+async def main():
     init_db()
 
     logging.info("GAME ZONE bot started")
 
-    await dp.start_polling(bot)
+    notification_task = asyncio.create_task(
+        notifications_worker()
+    )
+
+    try:
+        await dp.start_polling(bot)
+    finally:
+        notification_task.cancel()
+        try:
+            await notification_task
+        except asyncio.CancelledError:
+            pass
+        await bot.session.close()
 
 
 if __name__ == "__main__":
