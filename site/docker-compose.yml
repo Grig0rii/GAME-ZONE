@@ -1,0 +1,7 @@
+services:
+  website:
+    build: .
+    container_name: game-zone-website
+    ports:
+      - "8200:80"
+    restart: unless-stopped

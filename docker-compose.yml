@@ -1,0 +1,20 @@
+services:
+  website:
+    build: ./site
+    container_name: game-zone-website
+    ports:
+      - "8200:80"
+    restart: unless-stopped
+
+  bot:
+    build: ./bot
+    container_name: game-zone-bot
+    env_file:
+      - ./bot/.env
+    network_mode: host
+    volumes:
+      - bot_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  bot_data:

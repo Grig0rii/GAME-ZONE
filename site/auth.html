@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME ZONE — Авторизация</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+    <div class="auth-container">
+
+        <a href="index.html" class="logo">
+            GAME<span>ZONE</span>
+        </a>
+
+        <div class="auth-box">
+
+            <div class="tabs">
+                <button class="tab active" id="loginTab">ВХОД</button>
+                <button class="tab" id="registerTab">РЕГИСТРАЦИЯ</button>
+            </div>
+
+            <!-- Вход -->
+
+            <form id="loginForm">
+                <h1>С ВОЗВРАЩЕНИЕМ</h1>
+                <p>Войди в свой аккаунт GAME ZONE</p>
+
+                <input
+                    type="text"
+                    id="loginUsername"
+                    placeholder="Логин"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Пароль"
+                    required
+                >
+
+                <button type="submit">ВОЙТИ В АККАУНТ</button>
+            </form>
+
+            <!-- Регистрация -->
+
+            <form id="registerForm" class="hidden">
+                <h1>СОЗДАЙ АККАУНТ</h1>
+                <p>Присоединяйся к GAME ZONE</p>
+
+                <input
+                    type="text"
+                    id="regUsername"
+                    placeholder="Логин *"
+                    minlength="3"
+                    maxlength="50"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="regFullName"
+                    placeholder="Твоё имя *"
+                    maxlength="100"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="regPassword"
+                    placeholder="Пароль * (минимум 8 символов)"
+                    minlength="8"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="regPasswordConfirm"
+                    placeholder="Повтори пароль *"
+                    required
+                >
+
+                <input
+                    type="tel"
+                    id="regPhone"
+                    placeholder="Номер телефона (необязательно)"
+                >
+
+                <input
+                    type="email"
+                    id="regEmail"
+                    placeholder="Электронная почта (необязательно)"
+                >
+
+                <button type="submit">СОЗДАТЬ АККАУНТ</button>
+            </form>
+
+            <div id="message"></div>
+
+        </div>
+
+        <a href="index.html" class="back-link">← НА ГЛАВНУЮ</a>
+
+    </div>
+
+    <script src="auth.js"></script>
+
+</body>
+</html>

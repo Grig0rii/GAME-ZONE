@@ -1,0 +1,494 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+    --black: #080808;
+    --green: #b6ff00;
+    --red: #ff1744;
+    --gray: #191919;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+}
+
+header {
+    min-height: 85px;
+    padding: 18px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    border-bottom: 1px solid #292929;
+    background: #080808;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 25px;
+    font-weight: 800;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--green);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--green);
+}
+
+.header-button,
+.main-button,
+.secondary-button,
+.telegram-button {
+    display: inline-block;
+    padding: 15px 25px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.header-button,
+.main-button {
+    background: var(--green);
+    color: black;
+}
+
+.header-button:hover,
+.main-button:hover {
+    background: var(--red);
+    color: white;
+    transform: translateY(-3px);
+}
+
+.hero {
+    min-height: 620px;
+    padding: 100px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 600px;
+    z-index: 1;
+}
+
+.subtitle {
+    color: var(--green);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(45px, 7vw, 85px);
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+
+h1 span,
+h2 span {
+    color: var(--green);
+}
+
+.description {
+    color: #aaa;
+    line-height: 1.8;
+    max-width: 470px;
+    margin-bottom: 35px;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.secondary-button {
+    border: 1px solid var(--green);
+    color: var(--green);
+}
+
+.secondary-button:hover {
+    background: var(--green);
+    color: black;
+}
+
+.hero-decoration {
+    width: 350px;
+    height: 350px;
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle {
+    width: 280px;
+    height: 280px;
+    border: 3px solid var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 35px var(--green),
+                inset 0 0 35px #b6ff0033;
+    animation: pulse 3s infinite;
+}
+
+.hero-label {
+    position: absolute;
+    color: var(--red);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    letter-spacing: 3px;
+    font-size: 13px;
+    text-align: center;
+}
+
+@keyframes pulse {
+    50% {
+        box-shadow: 0 0 65px var(--green),
+                    inset 0 0 50px #b6ff0044;
+    }
+}
+
+.about,
+.services,
+.prices,
+.booking,
+.telegram {
+    padding: 90px 10%;
+}
+
+h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(28px, 4vw, 45px);
+    margin-bottom: 25px;
+}
+
+.about > p:last-child,
+.booking > p:not(.subtitle),
+.telegram > p:not(.subtitle) {
+    color: #aaa;
+    line-height: 1.8;
+    max-width: 700px;
+}
+
+.services {
+    background: #101010;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 45px;
+}
+
+.card {
+    background: var(--gray);
+    border: 1px solid #333;
+    padding: 35px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    border-color: var(--green);
+    transform: translateY(-7px);
+    box-shadow: 0 0 20px #b6ff0018;
+}
+
+.card-number {
+    color: var(--red);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 25px;
+    margin-bottom: 35px;
+}
+
+.card h3,
+.price-box h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--green);
+    margin-bottom: 20px;
+}
+
+.card p,
+.price-box p {
+    color: #aaa;
+    line-height: 1.7;
+}
+
+.prices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.prices .subtitle,
+.prices h2 {
+    width: 100%;
+}
+
+.price-box {
+    background: var(--gray);
+    border: 1px solid #333;
+    padding: 30px;
+    flex: 1;
+    min-width: 220px;
+    transition: 0.3s;
+}
+
+.price-box:hover {
+    border-color: var(--green);
+}
+
+.price {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 35px;
+    color: var(--green);
+    margin-top: 20px;
+}
+
+.booking {
+    text-align: center;
+    background: #111;
+}
+
+.booking > p:not(.subtitle) {
+    margin: 0 auto;
+}
+
+.booking .main-button {
+    margin-top: 30px;
+}
+
+.telegram {
+    text-align: center;
+    background: #080808;
+    border-top: 1px solid #292929;
+}
+
+.telegram > p:not(.subtitle) {
+    margin: 0 auto;
+}
+
+.telegram-button {
+    margin-top: 30px;
+    border: 1px solid var(--green);
+    color: var(--green);
+}
+
+.telegram-button:hover {
+    background: var(--green);
+    color: black;
+    box-shadow: 0 0 20px #b6ff0055;
+}
+
+footer {
+    border-top: 1px solid #333;
+    padding: 30px 10%;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    color: #777;
+    font-size: 12px;
+}
+
+@media (max-width: 1000px) {
+    header {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav {
+        order: 3;
+        width: 100%;
+    }
+
+    .hero-decoration {
+        width: 250px;
+        height: 250px;
+    }
+
+    .circle {
+        width: 210px;
+        height: 210px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 22px 5%;
+        gap: 18px;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+    .header-button {
+        padding: 12px 18px;
+    }
+
+    .hero {
+        padding: 75px 7%;
+        min-height: auto;
+    }
+
+    .hero-decoration {
+        display: none;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .about,
+    .services,
+    .prices,
+    .booking,
+    .telegram {
+        padding: 70px 7%;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .price-box {
+        flex-basis: 100%;
+    }
+
+    footer {
+        flex-direction: column;
+        padding: 25px 7%;
+    }
+}
+
+@media (max-width: 400px) {
+    .logo {
+        font-size: 22px;
+    }
+
+    nav {
+        gap: 12px;
+    }
+
+    h1 {
+        font-size: 42px;
+    }
+
+    .subtitle {
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+}
+/* ===== TELEGRAM SECTION FIX ===== */
+
+.telegram {
+    padding: 100px 20px;
+    background: #080808;
+    border-top: 1px solid #222;
+    text-align: center;
+}
+
+.telegram .subtitle {
+    color: #b6ff00;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    margin-bottom: 22px;
+}
+
+.telegram h2 {
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 800;
+    margin: 0 auto 25px;
+    line-height: 1.2;
+}
+
+.telegram h2 span {
+    color: #b6ff00;
+}
+
+.telegram p:not(.subtitle) {
+    max-width: 750px;
+    margin: 0 auto 30px;
+    color: #aaa;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.telegram .telegram-button {
+    display: inline-block;
+    padding: 17px 30px;
+    background: #b6ff00;
+    color: #000;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transition: 0.2s ease;
+}
+
+.telegram .telegram-button:hover {
+    background: #fff;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 600px) {
+    .telegram {
+        padding: 70px 20px;
+    }
+
+    .telegram h2 {
+        font-size: 28px;
+    }
+
+    .telegram p:not(.subtitle) {
+        font-size: 14px;
+    }
+}

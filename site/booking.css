@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Roboto:wght@400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #080a08;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    padding: 25px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #252b20;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.logo span,
+h1 span {
+    color: #a8ff00;
+}
+
+.account-link {
+    color: #a8ff00;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+}
+
+main {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+}
+
+.booking-section {
+    width: 100%;
+    max-width: 600px;
+}
+
+.subtitle {
+    color: #a8ff00;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(27px, 5vw, 42px);
+    margin-bottom: 15px;
+}
+
+.description {
+    color: #999;
+    margin-bottom: 35px;
+}
+
+form {
+    background: #111610;
+    border: 1px solid #35412a;
+    padding: 30px;
+}
+
+label {
+    display: block;
+    margin: 20px 0 10px;
+    color: #a8ff00;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 14px;
+    background: #080a08;
+    color: white;
+    border: 1px solid #35412a;
+    outline: none;
+    font-size: 16px;
+}
+
+input:focus,
+select:focus {
+    border-color: #a8ff00;
+}
+
+button {
+    width: 100%;
+    margin-top: 30px;
+    padding: 16px;
+    background: #a8ff00;
+    color: black;
+    border: none;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #d0ff75;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#message {
+    margin-top: 20px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.success {
+    color: #a8ff00;
+}
+
+.error {
+    color: #ff4444;
+}
+
+footer {
+    padding: 30px;
+    text-align: center;
+    color: #666;
+    border-top: 1px solid #252b20;
+}

@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Roboto:wght@400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 50% 30%, #17200d, #080a08 65%);
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 15px;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 460px;
+    text-align: center;
+}
+
+.logo {
+    display: inline-block;
+    margin-bottom: 30px;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.logo span {
+    color: #a8ff00;
+}
+
+.auth-box {
+    padding: 35px;
+    background: #101410;
+    border: 1px solid #a8ff00;
+    box-shadow: 0 0 30px rgba(168, 255, 0, 0.12);
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 35px;
+}
+
+.tab {
+    width: 50%;
+    padding: 13px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #333;
+    color: #888;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.tab.active {
+    color: #a8ff00;
+    border-color: #a8ff00;
+}
+
+form h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 23px;
+    margin-bottom: 10px;
+}
+
+form p {
+    color: #999;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+form input {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: #080a08;
+    border: 1px solid #333;
+    color: white;
+    outline: none;
+}
+
+form input:focus {
+    border-color: #a8ff00;
+    box-shadow: 0 0 10px rgba(168, 255, 0, 0.15);
+}
+
+form button {
+    width: 100%;
+    padding: 16px;
+    margin-top: 10px;
+    background: #a8ff00;
+    border: none;
+    color: black;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background: white;
+    box-shadow: 0 0 20px rgba(168, 255, 0, 0.4);
+}
+
+.hidden {
+    display: none;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 25px;
+    color: #a8ff00;
+    text-decoration: none;
+}
+
+@media (max-width: 480px) {
+    .auth-box {
+        padding: 22px;
+    }
+
+    form h1 {
+        font-size: 19px;
+    }
+}

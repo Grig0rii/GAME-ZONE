@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME ZONE — Личный кабинет</title>
+    <link rel="stylesheet" href="account.css">
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">GAME<span>ZONE</span></a>
+    <button id="logoutButton">ВЫЙТИ</button>
+</header>
+
+<main>
+    <section class="welcome">
+        <p class="subtitle">// ЛИЧНЫЙ КАБИНЕТ</p>
+        <h1>ПРИВЕТ, <span id="userName">ИГРОК</span>!</h1>
+        <p>Рады видеть тебя в GAME ZONE.</p>
+    </section>
+
+    <section class="profile">
+        <h2>МОЙ <span>ПРОФИЛЬ</span></h2>
+
+        <div class="profile-card">
+            <p>Логин: <strong id="username">Загрузка...</strong></p>
+            <p>Имя: <strong id="fullName">Загрузка...</strong></p>
+            <p>Телефон: <strong id="phone">Не указан</strong></p>
+            <p>Email: <strong id="email">Не указан</strong></p>
+        </div>
+    </section>
+
+    <section class="telegram-section">
+        <h2>TELEGRAM <span>GAME ZONE</span></h2>
+
+        <div class="profile-card">
+            <p id="telegramStatus">Проверяем подключение Telegram...</p>
+
+            <button type="button" id="telegramLinkButton">
+                ПРИВЯЗАТЬ TELEGRAM
+            </button>
+
+            <div id="telegramCodeBox" hidden>
+                <p>Твой одноразовый код:</p>
+                <h2 id="telegramCode"></h2>
+
+                <p>
+                    Открой бота GAME ZONE и отправь ему команду:
+                </p>
+
+                <p><strong id="telegramCommand"></strong></p>
+
+                <a
+                    href="https://t.me/GameZoneSitebot"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ОТКРЫТЬ TELEGRAM-БОТА →
+                </a>
+
+                <p>Код действует 10 минут.</p>
+            </div>
+
+            <p id="telegramMessage" role="status"></p>
+        </div>
+    </section>
+
+    <section class="bookings">
+        <h2>МОИ <span>БРОНИРОВАНИЯ</span></h2>
+
+        <div class="booking-card">
+            <p>Пока у тебя нет бронирований.</p>
+            <a href="index.html#booking">ЗАБРОНИРОВАТЬ МЕСТО →</a>
+        </div>
+    </section>
+</main>
+
+<footer>
+    © 2026 GAME ZONE. ALL RIGHTS RESERVED.
+</footer>
+
+<script src="account.js?v=3"></script>
+
+</body>
+</html>

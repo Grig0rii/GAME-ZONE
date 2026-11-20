@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME ZONE — Бронирование</title>
+    <link rel="stylesheet" href="booking.css">
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">GAME<span>ZONE</span></a>
+    <a href="account.html" class="account-link">ЛИЧНЫЙ КАБИНЕТ</a>
+</header>
+
+<main>
+    <section class="booking-section">
+        <p class="subtitle">// GAME ZONE BOOKING SYSTEM</p>
+
+        <h1>ЗАБРОНИРУЙ <span>СВОЁ МЕСТО</span></h1>
+
+        <p class="description">
+            Выбери игровое место, дату и удобное время.
+        </p>
+
+        <form id="bookingForm">
+
+            <label for="place">Игровое место</label>
+            <select id="place" required>
+                <option value="">Загрузка мест...</option>
+            </select>
+
+            <label for="date">Дата бронирования</label>
+            <input type="date" id="date" required>
+
+            <label for="startTime">Начало</label>
+            <input type="time" id="startTime" required>
+
+            <label for="endTime">Окончание</label>
+            <input type="time" id="endTime" required>
+
+            <button type="submit">ЗАБРОНИРОВАТЬ</button>
+
+        </form>
+
+        <div id="message"></div>
+
+    </section>
+</main>
+
+<footer>
+    © 2026 GAME ZONE. ALL RIGHTS RESERVED.
+</footer>
+
+<script src="booking.js"></script>
+
+</body>
+</html>
